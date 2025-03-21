@@ -25,14 +25,15 @@ answers = [
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
 
-questions_to_ask = random.choices(list(zip(questions,
-answers, correct_answers_index)), k=3)
+questions_to_ask = random.sample(list(zip(questions,answers, correct_answers_index)), k=3)
 
 # zip(questions, answers, correct_answers_index): 
 # Combina las tres listas en tuplas donde cada tupla contiene una pregunta, 
 # sus respuestas posibles y el índice correcto.
-# list(zip(...)): Convierte ese objeto en una lista de tuplas
+# list(zip(...)): Convierte ese objeto en una lista de tuplas.
 # random.choices(..., k=3): Selecciona aleatoriamente 3 de esas tuplas para usarlas en el juego.
+# random.sample() selecciona elementos únicos de una lista, lo que asegura que no haya repeticiones
+# como tengo 5 preeguntas para elegir, quiero preguntar 3 preguntas diferentes ent k=3.
 
 points = 0
 
