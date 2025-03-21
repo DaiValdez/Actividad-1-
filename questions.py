@@ -24,17 +24,25 @@ answers = [
 ]
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
+
+questions_to_ask = random.choices(list(zip(questions,
+answers, correct_answers_index)), k=3)
+
+# zip(questions, answers, correct_answers_index): 
+# Combina las tres listas en tuplas donde cada tupla contiene una pregunta, 
+# sus respuestas posibles y el índice correcto.
+# list(zip(...)): Convierte ese objeto en una lista de tuplas
+# random.choices(..., k=3): Selecciona aleatoriamente 3 de esas tuplas para usarlas en el juego.
+
 points = 0
 
 # El usuario deberá contestar 3 preguntas
-for _ in range(3):
-    # Se selecciona una pregunta aleatoria
-    question_index = random.randint(0, len(questions) - 1)
-
+for question, answer,correct_index in questions_to_ask:
+    
     # Se muestra la pregunta y las respuestas posibles
-    print(questions[question_index])
-    for i, answer in enumerate(answers[question_index]):
-        print(f"{i + 1}. {answer}")
+    print(question)
+    for i, ans in enumerate(answer):
+        print(f"{i + 1}. {ans}")
 
     # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
@@ -46,7 +54,7 @@ for _ in range(3):
         #si es un numero lo convierte en entero
         user_answer = int(user_answer)-1
         # Se verifica si la respuesta es correcta
-        if user_answer == correct_answers_index[question_index]:
+        if user_answer == correct_index:
             print("¡Correcto!")
             points += 1   # Sumar un punto por acierto
             break 
@@ -57,7 +65,7 @@ for _ in range(3):
         # Si el usuario no responde correctamente después de 2 intentos,
         # se muestra la respuesta correcta
         print("Incorrecto. La respuesta correcta es:")
-        print(answers[question_index][correct_answers_index[question_index]])
+        print(answer[correct_index])
 
 
     # Se imprime un blanco al final de la pregunta
